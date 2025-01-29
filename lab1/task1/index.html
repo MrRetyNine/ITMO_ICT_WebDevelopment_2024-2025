@@ -20,7 +20,7 @@
     
     
       
-        <title>Задание 1 - Отчеты по веб-программированию</title>
+        <title>Задание 1 - Отчеты по веб-программированию Елизаветы Карнауховой</title>
       
     
     
@@ -86,7 +86,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="Отчеты по веб-программированию" class="md-header__button md-logo" aria-label="Отчеты по веб-программированию" data-md-component="logo">
+    <a href="../.." title="Отчеты по веб-программированию Елизаветы Карнауховой" class="md-header__button md-logo" aria-label="Отчеты по веб-программированию Елизаветы Карнауховой" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -100,7 +100,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            Отчеты по веб-программированию
+            Отчеты по веб-программированию Елизаветы Карнауховой
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -181,13 +181,13 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Отчеты по веб-программированию" class="md-nav__button md-logo" aria-label="Отчеты по веб-программированию" data-md-component="logo">
+    <a href="../.." title="Отчеты по веб-программированию Елизаветы Карнауховой" class="md-nav__button md-logo" aria-label="Отчеты по веб-программированию Елизаветы Карнауховой" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
-    Отчеты по веб-программированию
+    Отчеты по веб-программированию Елизаветы Карнауховой
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -304,7 +304,7 @@
         <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
-      Запуск
+      Код
     </span>
   </a>
   
@@ -373,6 +373,27 @@
   
   <span class="md-ellipsis">
     Задание 4
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../task5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Задание 5
   </span>
   
 
@@ -691,7 +712,7 @@
         <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
-      Запуск
+      Код
     </span>
   </a>
   
@@ -719,16 +740,37 @@
 <li>Протокол: UDP</li>
 <li>Используемые библиотеки: socket</li>
 </ul>
-<h2 id="_1">Запуск</h2>
+<h2 id="_1">Код</h2>
 <ul>
-<li>Запустите сервер:</li>
+<li>Сервер:</li>
 </ul>
-<pre><code class="language-python">python server.py
+<pre><code class="language-python">import socket
+
+con_sever = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+con_sever.bind(('localhost', 9090))
+
+while True:
+    data,adr = con_sever.recvfrom(1024)
+    print(data.decode())
+    con_sever.sendto(b'Hello, client',adr)
+    if not data:
+        break
+
+con_sever.close()
 </code></pre>
 <ul>
-<li>Запустите клиента:</li>
+<li>Клиент:</li>
 </ul>
-<pre><code class="language-python">python client.py
+<pre><code class="language-python">import socket
+con_client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+con_client.connect(('localhost', 9090))
+con_client.sendto(b'Hello, server', ('localhost', 9090))
+
+while True:
+    data,adr = con_client.recvfrom(1024)
+    print(data.decode())
+
+con_client.close()
 </code></pre>
 
 
